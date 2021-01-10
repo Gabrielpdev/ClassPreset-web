@@ -29,7 +29,8 @@ import {
   FormOptions,
   FormIdentityField,
   FormIdentityFieldTitle,
-  FormIdentityFieldButton
+  FormIdentityFieldButton,
+  Loading
 } from '../styles/pages/Login';
 
 interface SignInFormData {
@@ -58,7 +59,7 @@ export default function Login (props) {
     }
   ];
   const [selectedRecurrency, setSelectedRecurrency] = useState(recurrences[0]);
-
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -78,12 +79,14 @@ export default function Login (props) {
           abortEarly: false,
         });
 
+        setLoading(true)
         await signIn({
           identify: data.identify,
           password: data.password,
           choice: selectedRecurrency.value
         });
-
+        
+        setLoading(false)
         Router.push('/home');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -161,7 +164,7 @@ export default function Login (props) {
           <Form ref={formRef} onSubmit={handleSubmit}>
           <FormTitle>Login</FormTitle>
 
-          <FormOptions>
+          <FormOptions className={selectedRecurrency.value}>
             <Switcher
               value={selectedRecurrency.value}
               onChange={setSelectedRecurrency}
@@ -184,7 +187,23 @@ export default function Login (props) {
               placeholder="Digite sua senha"
             />
 
-            <FormIdentityFieldButton type="submit">Confirmar presença !</FormIdentityFieldButton>
+            <FormIdentityFieldButton type="submit">{
+            loading ? (
+                <Loading>
+                  <span className="circle circle-1"></span>
+                  <span className="circle circle-2"></span>
+                  <span className="circle circle-3"></span>
+                  <span className="circle circle-4"></span>
+                  <span className="circle circle-5"></span>
+                  <span className="circle circle-6"></span>
+                  <span className="circle circle-7"></span>
+                  <span className="circle circle-8"></span>
+                </Loading>
+              ) : (
+                'Entrar'
+              )
+            }
+            </FormIdentityFieldButton>
           </FormIdentityField>
         </Form>
         </>

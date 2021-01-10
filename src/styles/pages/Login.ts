@@ -31,9 +31,8 @@ export const Title = styled.h2`
 
 export const Container = styled.div`
     background: #2A327D;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+    height: 100%;
+    width: 100%;
 
     @media(min-width: 992px){
       display: flex;
@@ -48,6 +47,7 @@ export const LogoContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   background: white;
+  overflow: hidden;
   
   position: relative;
   height: 352px;
@@ -130,6 +130,7 @@ export const TopRight = styled.div`
 
 export const Form = styled(formulario)`
   padding: 20px;
+  background: #2A327D;
 
   @media(min-width: 992px){
     width: 40%;
@@ -153,13 +154,41 @@ export const FormOptions = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
+
+  position: relative;
+
+
+  &.registration:after{
+    left: 0;
+  }
+
+  &.cpf:after{
+    left: calc(100% / 3);
+  }
+
+  &.cellphone:after{
+    left: calc((100% / 3) * 2);
+  }
+
+  &:after{
+    transition: all 0.3s ease;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #F9AC38;
+    border-radius: 40px;
+    width: calc(100% / 3);
+    height: 100%;
+    z-index: 0;
+  }
 `;
 
 export const FormOptionsButton = styled.button<IChoiceButton>`
   border: 0;
-  background: #F9AC38;
+  background: transparent;
   color: #242424;
-  background: ${(props) => props.isSelected ? '#F9AC38' : 'transparent'};
+  /* background: ${(props) => props.isSelected ? '#F9AC38' : 'transparent'}; */
   color: ${(props) => props.isSelected ? '#242424' : '#fff'};
   transition: all 0.3s ease;
 
@@ -174,13 +203,14 @@ export const FormOptionsButton = styled.button<IChoiceButton>`
   display: flex;
   align-items: center;
   justify-content:center;
+  z-index: 1;
 
   width: 100%;
   font-family: "Paytone One";
 
-  &:hover{
+  /* &:hover{
     background: ${(props) => props.isSelected ? '#F9BB5F' : '#4F58AB'};
-  }
+  } */
 `;
 
 export const FormIdentityField = styled.div`
@@ -220,5 +250,62 @@ export const FormIdentityFieldButton = styled.button`
 
   &:hover{
     background: #00B289;
+  }
+`;
+
+export const Loading = styled.div`
+  position:relative;
+  top:51%;
+  left:50%;
+  transform:translate(-50%, -50%); 
+
+  .circle{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #00C689;
+    border-radius: 50%;
+    animation: loading 1.5s cubic-bezier(.8, .5, .2, 1.4) infinite;
+    transform-origin: bottom center;
+    position: relative;
+    margin-right: 3px;
+  }
+  @keyframes loading{
+    0%{
+      transform: translateY(0px);
+      background-color: #00C689;
+    }
+    50%{
+      transform: translateY(10px);
+      background-color: #fff;
+    }
+    100%{
+      transform: translateY(0px);
+      background-color: #00C689;
+    }
+  }
+  .circle-1{
+    animation-delay: 0.1s;
+  }
+  .circle-2{
+    animation-delay: 0.2s;
+  }
+  .circle-3{
+    animation-delay: 0.3s;
+  }
+  .circle-4{
+    animation-delay: 0.4s;
+  }
+  .circle-5{
+    animation-delay: 0.5s;
+  }
+  .circle-6{
+    animation-delay: 0.6s;
+  }
+  .circle-7{
+    animation-delay: 0.7s;
+  }
+  .circle-8{
+    animation-delay: 0.8s;
   }
 `;
