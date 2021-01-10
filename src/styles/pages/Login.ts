@@ -50,7 +50,15 @@ export const LogoContainer = styled.div`
   overflow: hidden;
   
   position: relative;
-  height: 352px;
+  height: 50px;
+
+  @media(min-width: 360px){
+    height: 210px;
+  }
+
+  @media(min-width: 768px){
+    height: 352px;
+  }
 
   @media(min-width: 992px){
     width: 100%;
@@ -60,8 +68,14 @@ export const LogoContainer = styled.div`
 
 export const Logo = styled.div`
   width: 226px;
+  display:none;
+
+  @media(min-width: 360px){
+    display:none;
+  }
 
   @media(min-width: 768px){
+    display:block;
     width: 380px;
   }
 
@@ -76,13 +90,33 @@ export const Logo = styled.div`
 export const BottomLeftMobile = styled.div`
   position: absolute;
   bottom : -5px;
-  left: 0;
+  display:none;
+
+  @media(min-width: 360px){
+    display:block;
+    height: 118px;
+    left: -10px;
+  }
+
+  @media(min-width: 768px){
+    height: unset;
+    left: 0;
+  }
 `;
 
 export const BottomRightMobile = styled.div`
   position: absolute;
   bottom: -7px;
   right: 0;
+  display:none;
+
+  @media(min-width: 360px){
+    display:block;
+    height: 118px;
+  }
+  @media(min-width: 768px){
+    height: unset;
+  }
 
   @media(min-width: 992px){
     display: none;
@@ -93,12 +127,22 @@ export const TopLeftMobile = styled.div`
   position: absolute;
   top: -3px;
   left: 0;
+  display:none;
+
+  @media(min-width: 360px){
+    display:block;
+  }
 `;
 
 export const TopRightMobile = styled.div`
   position: absolute;
   top: 0;
   right: 0;
+  display:none;
+
+  @media(min-width: 360px){
+    display:block;
+  }
 
   @media(min-width: 992px){
     display: none;

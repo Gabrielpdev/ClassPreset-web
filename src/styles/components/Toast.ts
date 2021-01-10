@@ -22,19 +22,24 @@ const toastTypeVariations = {
 };
 
 export const Container = styled(animated.div) <ContainerProps>`
-  width: 360px;
+  width: 220px;
   position: sticky;
   padding: 16px 30px 16px 16px;
   border-radius: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   display: flex;
+  z-index: 5;
+
   & + div {
     margin-top: 12px;
   }
+
   ${(props) => toastTypeVariations[props.type || 'info']}
+
   > svg {
     margin: 4px 12px 0 0;
   }
+
   div {
     flex: 1;
     p {
@@ -44,6 +49,7 @@ export const Container = styled(animated.div) <ContainerProps>`
       line-height: 20px;
     }
   }
+
   button {
     position: absolute;
     right: 16px;
@@ -53,6 +59,7 @@ export const Container = styled(animated.div) <ContainerProps>`
     background: transparent;
     color: inherit;
   }
+
   ${(props) =>
     !props.hasDescription &&
     css`
@@ -61,4 +68,8 @@ export const Container = styled(animated.div) <ContainerProps>`
         margin-top: 0;
       }
     `}
+
+  @media(min-width: 460px){
+    width: 360px; 
+  }
 `;

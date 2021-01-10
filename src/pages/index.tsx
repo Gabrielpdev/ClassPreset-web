@@ -89,6 +89,7 @@ export default function Login (props) {
         setLoading(false)
         Router.push('/home');
       } catch (err) {
+        setLoading(false)
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
 
