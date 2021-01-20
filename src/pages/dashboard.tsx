@@ -37,27 +37,28 @@ interface IProps {
   classes: IClasse[]
 }
 
-const fetcher = (url) => fetch(url).then((res) => res.json())
+// const fetcher = (url) => fetch(url).then((res) => res.json())
+
 export default function Dashboard ( { classes }: IProps ) {
   const [openGenerateModal, setOpenGenerateModal] = useState(false);
   // const [ user ] = useState(props || '');
   // console.log(classes)
-  const { data } = useSwr('/api/classes', fetcher)
+  // const { data } = useSwr('/api/classes', fetcher)
 
-  function generateLink(): void {
+  const generateLink = useCallback(() => {
     console.log("GERA O LINK");
     toggleModal();
-  }
+  }, [])
 
-  function deleteClass(): void {
+  const deleteClass = useCallback(() => {
     if (confirm("Deseja deletar essa turma ?")){
       console.log("DELETAR TURMA")
     }
-  }
+  }, []) 
 
-  function toggleModal(): void {
-    setOpenGenerateModal(!openGenerateModal);
-  }
+  const toggleModal = useCallback(() => {
+    setOpenGenerateModal(value => !value);
+  }, [])
   
   return (
     <Container>
@@ -75,7 +76,7 @@ export default function Dashboard ( { classes }: IProps ) {
           </Title>
         
           <ContainerClasses>
-            {data?.map(classe => (
+            {classes?.map(classe => (
               <Class key={classe.id}>
                 <ButtonsList>
                   <Button type='button' layoutType='view' >Visualizar</Button>
@@ -101,21 +102,18 @@ export default function Dashboard ( { classes }: IProps ) {
   )
 }
 
+export const getStaticProps: GetStaticProps<IProps> = async () => {
+  const response = await fetch('http://localhost:3000/api/classes');
+  const classes = await response.json();
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   const response = await fetch(`http://localhost:3333/api/classes`);
-//   const classes = await response.json();
-
-//   const paths = classes.map( classe => ({
-//     params: { slug: classe.id}
-//   }))
-
-//   return {
-//     paths,
-//     fallback: true, // Quando o primeiro usuário tentar acessar uma rota
-// 		//que ainda nao foi gerada estaticamente, ele tenta gerar.
-//   }
-// }
+  return {
+    props: {
+      classes
+    },
+    revalidate: 1 // Após 5 segundos o next gera
+    //uma nova versão da página
+  }
+}
 
 // export const getStaticProps: GetStaticProps<IProps> = async (context) => {
 

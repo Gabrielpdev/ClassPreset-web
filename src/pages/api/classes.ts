@@ -1,7 +1,7 @@
 import { uuid } from 'uuidv4';
 const classe = [
   {
-    id: uuid(),
+    id: 1,
     name: 'EBEP - 2020',
     students: [
       {
@@ -63,7 +63,7 @@ const classe = [
     ],
   },
   {
-    id: uuid(),
+    id: 2,
     name: 'EBEP - 2020',
     students: [
       {
@@ -125,7 +125,7 @@ const classe = [
     ],
   },
   {
-    id: uuid(),
+    id: 3,
     name: 'EBEP - 2020',
     students: [
       {
@@ -187,7 +187,7 @@ const classe = [
     ],
   },
   {
-    id: uuid(),
+    id: 4,
     name: 'EBEP - 2020',
     students: [
       {
@@ -249,7 +249,7 @@ const classe = [
     ],
   },
   {
-    id: uuid(),
+    id: 5,
     name: 'EBEP - 2020',
     students: [
       {
