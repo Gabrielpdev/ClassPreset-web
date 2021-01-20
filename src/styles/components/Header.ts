@@ -1,22 +1,24 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Head = styled.div`
   background: #2A327D;
   height: 65px;
-
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  padding: 0 15%;
+  >div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
-export const Title = styled.h2`
+export const Title = styled.h1`
   color: #fff;
 
   font-style: normal;
   font-weight: normal;
-  font-size: 24px;
+  font-size: 34px;
   line-height: 34px;
   display: flex;
   align-items: center;

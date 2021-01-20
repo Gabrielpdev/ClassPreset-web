@@ -39,7 +39,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     
     setCookie("user", JSON.stringify(user), {
       path: "/",
-      maxAge: 3600, // Expires after 1hr
+      maxAge: 86400, // Expires after 1hr
       sameSite: true,
     })
 

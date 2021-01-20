@@ -215,13 +215,14 @@ export default function Login (props) {
 
 Login.getInitialProps = async ({ req, res }) => {
   const { user } = parseCookies(req)
-  
+
   if (user) {
+    const userObject = Object.assign(JSON.parse(user) , { type: 'teacher' })
     if(typeof window === 'undefined'){
-      res.writeHead(302, { Location: '/home' })
+      userObject.type === 'teacher' ? res.writeHead(302, { Location: '/dashboard' }) : res.writeHead(302, { Location: '/home' })
       res.end()
     }else{
-      Router.push('/home')
+      userObject.type === 'teacher' ? Router.push('/dashboard') : Router.push('/home')
     }
     return{ redirect : true };
   };

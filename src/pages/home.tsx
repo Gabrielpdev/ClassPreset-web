@@ -1,6 +1,5 @@
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import { useState } from 'react';
-import { useAuth } from '../hooks/AuthProvider';
 import { parseCookies } from '../helpers';
 import Header from '../components/Header';
 
@@ -11,14 +10,7 @@ interface Props {
 }
 
 export default function Home ( props ) {
-  const { push } = useRouter();
-  const { signOut } = useAuth();
-  const [user, setUser] = useState<Props>(props || '');
-
-  const handleSignOut = () => {
-    signOut();
-    push('/');
-  }
+  const [user ] = useState<Props>(props || '');
 
   return (
     <Container>
@@ -39,7 +31,16 @@ export default function Home ( props ) {
 Home.getInitialProps = async ({ req, res }) => {
   const { user } = parseCookies(req)
   
-  if (!user) {
+  if (user) {
+    const userObject = Object.assign(JSON.parse(user) , { type: 'teacher' })
+    if(typeof window === 'undefined'){
+      userObject.type === 'teacher' && res.writeHead(302, { Location: '/dashboard' })
+      res.end()
+    }else{
+      userObject.type === 'teacher' && Router.push('/dashboard')
+    }
+    return userObject;
+  }else {
     if(typeof window === 'undefined'){
       res.writeHead(302, { Location: '/' })
       res.end()
@@ -48,6 +49,4 @@ Home.getInitialProps = async ({ req, res }) => {
     }
     return {}
   };
-
-  return JSON.parse(user);
 }
