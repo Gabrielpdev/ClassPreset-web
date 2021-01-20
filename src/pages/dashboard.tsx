@@ -49,6 +49,12 @@ export default function Dashboard ( { classes }: IProps ) {
     toggleModal();
   }
 
+  function deleteClass(): void {
+    if (confirm("Deseja deletar essa turma ?")){
+      console.log("DELETAR TURMA")
+    }
+  }
+
   function toggleModal(): void {
     setOpenGenerateModal(!openGenerateModal);
   }
@@ -80,7 +86,7 @@ export default function Dashboard ( { classes }: IProps ) {
                   /> 
                   <Button type='button' onClick={generateLink} layoutType='generate' >Gerar Link</Button>
                   <Button type='button' layoutType='edit' >Editar</Button>
-                  <Button type='button' layoutType='delete' >Deletar</Button>
+                  <Button type='button' onClick={deleteClass} layoutType='delete' >Deletar</Button>
                 </ButtonsList>
                 <InfoClass>
                   <ClassName>{classe.name}</ClassName>
