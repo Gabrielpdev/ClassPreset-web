@@ -7,6 +7,7 @@ import useSwr from 'swr';
 
 import Header from '../components/Header';
 import ModalGenerate from '../components/Modal/ModalGenerate';
+import ModalView from '../components/Modal/ModalView';
 
 import { 
   Container,
@@ -41,13 +42,14 @@ interface IProps {
 
 export default function Dashboard ( { classes }: IProps ) {
   const [openGenerateModal, setOpenGenerateModal] = useState(false);
+  const [openViewModal, setOpenViewModal] = useState(false);
   // const [ user ] = useState(props || '');
   // console.log(classes)
   // const { data } = useSwr('/api/classes', fetcher)
 
   const generateLink = useCallback(() => {
     console.log("GERA O LINK");
-    toggleModal();
+    toggleGenerateModal();
   }, [])
 
   const deleteClass = useCallback(() => {
@@ -56,8 +58,12 @@ export default function Dashboard ( { classes }: IProps ) {
     }
   }, []) 
 
-  const toggleModal = useCallback(() => {
+  const toggleGenerateModal = useCallback(() => {
     setOpenGenerateModal(value => !value);
+  }, [])
+ 
+  const toggleViewModal = useCallback(() => {
+    setOpenViewModal(value => !value);
   }, [])
   
   return (
@@ -79,13 +85,18 @@ export default function Dashboard ( { classes }: IProps ) {
             {classes?.map(classe => (
               <Class key={classe.id}>
                 <ButtonsList>
-                  <Button type='button' layoutType='view' >Visualizar</Button>
+                  <Button type='button' onClick={toggleViewModal} layoutType='view' >Visualizar</Button>
+                  <ModalView
+                    isOpen={openGenerateModal}
+                    setIsOpen={toggleViewModal}
+                    classId={classe.id}
+                  />
+                  <Button type='button' onClick={generateLink} layoutType='generate' >Gerar Link</Button>
                   <ModalGenerate
                     isOpen={openGenerateModal}
-                    setIsOpen={toggleModal}
+                    setIsOpen={toggleGenerateModal}
                     generatedLink='teste'
                   /> 
-                  <Button type='button' onClick={generateLink} layoutType='generate' >Gerar Link</Button>
                   <Button type='button' layoutType='edit' >Editar</Button>
                   <Button type='button' onClick={deleteClass} layoutType='delete' >Deletar</Button>
                 </ButtonsList>
