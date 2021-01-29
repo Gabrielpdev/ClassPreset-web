@@ -1,44 +1,142 @@
-import { useRef } from 'react';
+import { createRef } from 'react';
+import { SwiperOptions } from 'swiper';
 import Swiper from 'react-id-swiper';
 import Modal from '../index'; 
 
-import { Title, SubTitle, InputLink, CopyButton } from '../../../styles/components/ModalGenerate';
+import CustomSwiperPagination from './custom-swiper-pagination';
+
+import { 
+  Container,
+  NameClass,
+  TitleTable,
+  CallsTable,
+  CallsTableBody,
+  NameCallsTable,
+  DataCallsTable,
+ } from '../../../styles/components/ModalView';
 
 function ModalView({ isOpen, setIsOpen, classId }) {
-  const params = {
-    spaceBetween: 2,
-    slidesPerView: 1,
-    breakpoints: {
-      768: {
-        slidesPerView: 3,
-        spaceBetween: 32,
-      },
-    },
+  const params : SwiperOptions = {
     pagination: {
       el: '.swiper-pagination',
       type: 'bullets',
+      clickable: true
     },
     navigation: {
       nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      prevEl: '.swiper-button-prev'
     },
+    spaceBetween: 20
   }
-
-  const linkRef = useRef(null);
-
-  // function copyToClipboard(e) {
-  //   linkRef.current.select();
-  //   document.execCommand('copy');
-  //   e.target.focus();
-  //   alert('Link copiado!');
-  // };
+  
+  const swiperRef = createRef();
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} >
-      <Swiper {...params}>
-        <div><h2>slider 1</h2></div>
-        <div><h2>slider 2</h2></div>
+      <NameClass>Nome da turma</NameClass>
+      <Swiper {...params} ref={swiperRef}>
+        <Container>
+          <TitleTable>Chamadas</TitleTable>
+          <CallsTable>
+            <CallsTableBody>
+              <NameCallsTable>
+                <span>Nome</span>
+                <span>Dia</span>
+              </NameCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+              <DataCallsTable>
+                <span>Chamada 1</span>
+                <span>02/03/2021</span>
+              </DataCallsTable>
+            </CallsTableBody>
+          </CallsTable>
+        </Container>
+
+        <Container>
+          <TitleTable>Presença</TitleTable>
+          <CallsTable>
+            <CallsTableBody>
+              <NameCallsTable>
+                <span>Nome</span>
+                <span>Status</span>
+              </NameCallsTable>
+              <DataCallsTable>
+                <span>Gabriel Pereira Oliveira</span>
+                <span>Presente</span>
+              </DataCallsTable>
+            </CallsTableBody>
+          </CallsTable>
+        </Container>
       </Swiper>
+
+      <CustomSwiperPagination swiperRef={swiperRef} />
     </Modal>
   );
 }

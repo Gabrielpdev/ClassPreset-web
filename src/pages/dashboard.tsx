@@ -82,21 +82,25 @@ export default function Dashboard ( { classes }: IProps ) {
           </Title>
         
           <ContainerClasses>
-            {classes?.map(classe => (
+            {classes?.map((classe, index )=> (
               <Class key={classe.id}>
                 <ButtonsList>
+                  {index === 0 && (
+                    <>
+                      <ModalView
+                        isOpen={openViewModal}
+                        setIsOpen={toggleViewModal}
+                        classId={classe.id}
+                      />
+                      <ModalGenerate
+                        isOpen={openGenerateModal}
+                        setIsOpen={toggleGenerateModal}
+                        generatedLink='teste'
+                      />
+                    </>
+                  )}
                   <Button type='button' onClick={toggleViewModal} layoutType='view' >Visualizar</Button>
-                  <ModalView
-                    isOpen={openGenerateModal}
-                    setIsOpen={toggleViewModal}
-                    classId={classe.id}
-                  />
                   <Button type='button' onClick={generateLink} layoutType='generate' >Gerar Link</Button>
-                  <ModalGenerate
-                    isOpen={openGenerateModal}
-                    setIsOpen={toggleGenerateModal}
-                    generatedLink='teste'
-                  /> 
                   <Button type='button' layoutType='edit' >Editar</Button>
                   <Button type='button' onClick={deleteClass} layoutType='delete' >Deletar</Button>
                 </ButtonsList>

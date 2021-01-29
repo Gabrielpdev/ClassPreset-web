@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { FiX } from 'react-icons/fi';
 
-import { ModalStyle } from '../../styles/components/Modal';
+import { ModalStyle, CloseModal } from '../../styles/components/Modal';
 
 function Modal({ children, isOpen, setIsOpen }) {
   const [modalStatus, setModalStatus] = useState(isOpen);
@@ -11,17 +12,19 @@ function Modal({ children, isOpen, setIsOpen }) {
 
   return (
     <ModalStyle
-      shouldCloseOnOverlayClick={!false}
+      shouldCloseOnOverlayClick={true}
       onRequestClose={setIsOpen}
       isOpen={modalStatus}
-      ariaHideApp={false}
+      ariaHideApp={true}
       style={{
         overlay: {
-          opacity: 0.45,
           backgroundColor: '#121214e6',
         },
       }}
     >
+    <CloseModal type='button' onClick={setIsOpen}>
+      <FiX size={20} />
+    </CloseModal>
     {children}
   </ModalStyle>
   );
